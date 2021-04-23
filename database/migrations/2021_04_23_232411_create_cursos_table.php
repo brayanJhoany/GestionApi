@@ -16,6 +16,7 @@ class CreateCursosTable extends Migration
         Schema::create('cursos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nombre')->unique();
+            $table->string('seccion', 10)->default('A');
             $table->bigInteger('user_id')->unsigned();
             $table->timestamps();
             //foreing key
