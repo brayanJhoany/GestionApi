@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\CursoController;
+use App\Http\Controllers\ObservacionController;
+use App\Models\Observacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +17,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+//'middleware' => ['cors']
+Route::group(['prefix' => 'profesor'], function () {
+    Route::get('/{userId}/cursos', [CursoController::class, 'index']);
+    Route::get('/{userId}/curso/{cursoId}', [CursoController::class, 'index']);
+    //observaciones
+    Route::get('{userId}/curso/{cursoId}/bitacora/{bitacoraId}/observaciones', [ObservacionController::class, 'index']);
+    Route::post('{userId}/curso/{cursoId}/bitacora/{bitacoraId}/observacion', [ObservacionController::class, 'store']);
+    Route::put('{userId}/curso/{cursoId}/bitacora/{bitacoraId}/observacion', [ObservacionController::class, 'update']);
+    Route::put('{userId}/curso/{cursoId}/bitacora/{bitacoraId}/observacion/{id}', [ObservacionController::class, 'show']);
+    Route::delete('{userId}/curso/{cursoId}/bitacora/{bitacoraId}/observacion/{id}', [ObservacionController::class, 'destroy']);
 });
