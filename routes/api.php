@@ -27,7 +27,7 @@ Route::group(['prefix' => 'profesor'], function () {
     //observaciones
     Route::get('{userId}/curso/{cursoId}/bitacora/{bitacoraId}/observaciones', [ObservacionController::class, 'index']);
     Route::post('{userId}/curso/{cursoId}/bitacora/{bitacoraId}/observacion', [ObservacionController::class, 'store']);
-    Route::put('{userId}/curso/{cursoId}/bitacora/{bitacoraId}/observacion', [ObservacionController::class, 'update']);
-    Route::put('{userId}/curso/{cursoId}/bitacora/{bitacoraId}/observacion/{id}', [ObservacionController::class, 'show']);
+    Route::put('{userId}/curso/{cursoId}/bitacora/{bitacoraId}/observacion/{id}', [ObservacionController::class, 'update']);
+    Route::get('{userId}/curso/{cursoId}/bitacora/{bitacoraId}/observacion/{id}', [ObservacionController::class, 'show']);
     Route::delete('{userId}/curso/{cursoId}/bitacora/{bitacoraId}/observacion/{id}', [ObservacionController::class, 'destroy']);
 });

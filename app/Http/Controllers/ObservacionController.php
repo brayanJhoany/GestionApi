@@ -71,6 +71,39 @@ class ObservacionController extends ApiController
         $data = $manager->createData($resource);
         return $this->successResponse($data, 200);
     }
+    public function update(Request $request, int $userId, int $cursoId, int $bitacoraId, int $id)
+    {
+        $user = User::where('id', $userId)->first();
+        if (is_null($user)) {
+            //error response
+            dd("no existe el usuario");
+        }
+        $curso = Curso::where('id', $cursoId)
+            ->where('user_id', $user->id)
+            ->first();
+        if (is_null($curso)) {
+            //error response
+            dd("no existe el usuario");
+        }
+        $bitacora = Bitacora::where('id', $bitacoraId)
+            ->where('curso_id', $curso->id)->first();
+        if (is_null($bitacora)) {
+            //error response
+        }
+        $observacion = Observacion::where('id', $id)
+            ->where('bitacora_id', $bitacora->id)->first();
+        if (is_null($observacion)) {
+            //error response
+        }
+        $observacion->titulo = $request->titulo;
+        $observacion->descripcion = $request->descripcion;
+        $observacion->save();
+        $manager = new Manager();
+        $manager->setSerializer(new SerializerCustom());
+        $resource = new Item($observacion, new ObservacionTransformer());
+        $data = $manager->createData($resource);
+        return $this->successResponse($data, 200);
+    }
     public function destroy(Request $request, int $userId, int $cursoId, int $bitacoraId, int $id)
     {
         $user = User::where('id', $userId)->first();
