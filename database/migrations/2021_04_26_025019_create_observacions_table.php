@@ -18,6 +18,7 @@ class CreateObservacionsTable extends Migration
             $table->string('titulo', 100);
             $table->text('descripcion');
             $table->bigInteger('bitacora_id')->unsigned();
+            $table ->date('fecha')->default(now());
             $table->timestamps();
             //foreing key
             $table->foreign('bitacora_id')->references('id')->on('bitacoras')

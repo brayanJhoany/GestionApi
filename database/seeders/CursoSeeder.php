@@ -20,14 +20,14 @@ class CursoSeeder extends Seeder
                 'nombre' => 'Introducción a la programación',
                 'user_id' => User::all()->random()->id
             ],
-            // [
-            //     'nombre' => 'Introducción a la programación',
-            //     'user_id' => User::all()->random()->id
-            // ],
-            // [
-            //     'nombre' => 'Teoría de sistemas',
-            //     'user_id' => User::all()->random()->id
-            // ],
+            [
+                'nombre' => 'Introducción a la programación',
+                'user_id' => User::all()->random()->id
+            ],
+            [
+                'nombre' => 'Teoría de sistemas',
+                'user_id' => User::all()->random()->id
+            ],
             // [
             //     'nombre' => 'Introducción a la ICC',
             //     'user_id' => User::all()->random()->id

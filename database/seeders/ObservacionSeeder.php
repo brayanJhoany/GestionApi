@@ -15,29 +15,14 @@ class ObservacionSeeder extends Seeder
      */
     public function run()
     {
-        $observaciones = [
-            [
+        $bitacoras = Bitacora::all();
+        foreach ($bitacoras as $bitacora) {
+            $request = [
                 'titulo' => 'Titulo 1',
                 'descripcion' => 'descripcion 1',
-                'bitacora_id' => Bitacora::all()->random()->id
-
-            ],
-            [
-                'titulo' => 'Titulo 2',
-                'descripcion' => 'descripcion 2',
-                'bitacora_id' => Bitacora::all()->random()->id
-
-            ],
-            [
-                'titulo' => 'Titulo 3',
-                'descripcion' => 'descripcion 4',
-                'bitacora_id' => Bitacora::all()->random()->id
-
-            ],
-        ];
-
-        foreach ($observaciones as $observacion) {
-            Observacion::updateOrCreate($observacion);
+                'bitacora_id' => $bitacora->id
+            ];
+            Observacion::updateOrCreate($request);
         }
     }
 }

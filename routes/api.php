@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CursoController;
 use App\Http\Controllers\ObservacionController;
+use App\Http\Controllers\UserController;
 use App\Models\Observacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,7 +22,9 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 //'middleware' => ['cors']
+Route::get('/profesor/{id}', [UserController::class, 'show']);
 Route::group(['prefix' => 'profesor'], function () {
+    //usuarios
     Route::get('/{userId}/cursos', [CursoController::class, 'index']);
     Route::get('/{userId}/curso/{cursoId}', [CursoController::class, 'index']);
     //observaciones

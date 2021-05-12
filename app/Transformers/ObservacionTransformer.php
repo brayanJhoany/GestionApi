@@ -32,13 +32,12 @@ class ObservacionTransformer extends TransformerAbstract
      */
     public function transform(Observacion $observacion)
     {
-        $date = date_format($observacion->created_at, "Y/m/d H:i:s");
         return [
             "id"            => $observacion->id,
             "titulo"        => $observacion->titulo,
             "descripcion"   => $observacion->descripcion,
             "bitacoraId"    => $observacion->bitacora_id,
-            "fechaCreacion" => $date,
+            "fechaCreacion" => $observacion->fecha,
         ];
     }
 }

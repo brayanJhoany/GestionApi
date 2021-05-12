@@ -14,7 +14,7 @@ class Bitacora extends Model
      *
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = ['curso_id'];
 
     public function curso()
     {

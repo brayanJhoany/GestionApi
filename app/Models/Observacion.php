@@ -17,6 +17,7 @@ class Observacion extends Model
     protected $fillable = [
         'titulo',
         'descripcion',
+        'bitacora_id'
     ];
 
     public function bitacora()

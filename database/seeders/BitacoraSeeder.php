@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Bitacora;
 use App\Models\Curso;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -15,10 +16,12 @@ class BitacoraSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('bitacoras')->insert(
-            [
-                'curso_id' => Curso::all()->random()->id,
-            ]
-        );
+        $cursos = Curso::all();
+        foreach ($cursos as $curso) {
+            $request = [
+                'curso_id' => $curso->id,
+            ];
+            Bitacora::updateOrCreate($request);
+        }
     }
 }
