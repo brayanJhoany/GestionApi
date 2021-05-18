@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class BitacoraController extends Controller
 {
+    /**
+     * shows the courses associated with a user
+     * @param userId: user identifier.
+     * @param cursoId: curso identifier
+     */
     public function index($userId, $cursoId)
     {
         $user = User::where('id', $userId)->first(['id']);

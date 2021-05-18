@@ -16,24 +16,28 @@ use Illuminate\Http\Request;
 
 class ObservacionController extends ApiController
 {
+    /**
+     * displays all observations associated with a specific course
+     * @param userId: user identifier.
+     * @param cursoId: curso identifier.
+     * @param bitacoraId: bitacora identifier.
+     */
     public function index(int $userId, int $cursoId, int $bitacoraId)
     {
         $user = User::where('id', $userId)->first();
         if (is_null($user)) {
-            return $this->errorResponse(404, "usuario con identificador {$userId} no se encotro");
+            return $this->errorResponse(404, "The user with identifier {$userId} was not found.");
         }
-        $curso = Curso::where('id', $cursoId)
-            ->where('user_id', $user->id)
-            ->first();
+        $curso = Curso::where('id', $cursoId)->where('user_id', $user->id)->first();
         if (is_null($curso)) {
-            return $this->errorResponse(404, "curso con identificador {$cursoId} no se encotro");
+            return $this->errorResponse(404, "The curso with identifier {$cursoId} was not found.");
         }
         $bitacora = $curso->bitacora;
         if (is_null($bitacora)) {
-            return $this->errorResponse(404, "El curso no tiene bitacora asociada");
+            return $this->errorResponse(404, "The course has no associated logbook");
         }
         $observaciones = Observacion::where('bitacora_id', $bitacora->id)
-            ->orderBy('created_at', 'DESC')->get();
+            ->orderBy('created_at', 'ASC')->get();
         $manager = new Manager();
         $manager->setSerializer(new SerializerCustom());
         $resource = new Collection($observaciones, new ObservacionTransformer());
@@ -43,11 +47,17 @@ class ObservacionController extends ApiController
         ];
         return $this->successResponse($data, 200);
     }
+    /**
+     * records an observation
+     * @param userId: user identifier.
+     * @param cursoId: curso identifier.
+     * @param bitacoraId: bitacora identifier.
+     */
     public function store(Request $request, int $userId, int $cursoId, int $bitacoraId)
     {
         $user = User::where('id', $userId)->first();
         if (is_null($user)) {
-            return $this->errorResponse(404, "usuario con identificador {$userId} no se encotro");
+            return $this->errorResponse(404, "The user with identifier {$userId} was not found.");
         }
         $curso = Curso::where('id', $cursoId)
             ->where('user_id', $user->id)
@@ -58,7 +68,7 @@ class ObservacionController extends ApiController
         }
         $bitacora = $curso->bitacora;
         if (is_null($bitacora)) {
-            return $this->errorResponse(404, "El curso no tiene bitacora asociada");
+            return $this->errorResponse(404, "The curso with identifier {$cursoId} was not found.");
         }
         $observacion = new Observacion();
         $observacion->titulo = $request->titulo;
@@ -76,14 +86,13 @@ class ObservacionController extends ApiController
     {
         $user = User::where('id', $userId)->first();
         if (is_null($user)) {
-            return $this->errorResponse(404, "usuario con identificador {$userId} no se encotro");
+            return $this->errorResponse(404, "the curso with identifier {$cursoId} was not found.");
         }
         $curso = Curso::where('id', $cursoId)
             ->where('user_id', $user->id)
             ->first();
         if (is_null($curso)) {
-            //error response
-            return $this->errorResponse(404, "curso con identificador {$cursoId} no se encotro");
+            return $this->errorResponse(404, "The curso with identifier {$cursoId} was not found.");
         }
         $bitacora = $curso->bitacora;
         if (is_null($bitacora)) {
@@ -108,17 +117,17 @@ class ObservacionController extends ApiController
     {
         $user = User::where('id', $userId)->first();
         if (is_null($user)) {
-            return $this->errorResponse(404, "usuario con identificador {$userId} no se encotro");
+            return $this->errorResponse(404, "the curso with identifier {$cursoId} was not found.");
         }
         $curso = Curso::where('id', $cursoId)
             ->where('user_id', $user->id)
             ->first();
         if (is_null($curso)) {
-            return $this->errorResponse(404, "curso con identificador {$cursoId} no se encotro");
+            return $this->errorResponse(404, "The curso with identifier {$cursoId} was not found.");
         }
         $bitacora = $curso->bitacora;
         if (is_null($bitacora)) {
-            return $this->errorResponse(404, "El curso no tiene bitacora asociada");
+            return $this->errorResponse(404, "The course has no associated logbook");
         }
         $observacion = Observacion::where('id', $id)
             ->where('bitacora_id', $bitacora->id)->first();
