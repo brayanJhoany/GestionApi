@@ -6,10 +6,10 @@ use App\Models\Curso;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class BitacoraController extends Controller
+class BitacoraController extends ApiController
 {
     /**
-     * shows the courses associated with a user
+     * muestra la bitacora asociados a un usuario
      * @param userId: user identifier.
      * @param cursoId: curso identifier
      */
@@ -17,14 +17,13 @@ class BitacoraController extends Controller
     {
         $user = User::where('id', $userId)->first(['id']);
         if (is_null($user)) {
-            //error response
+            return $this->errorResponse(404, "No se encotro al usuario con identificador {$userId}");
         }
         $curso = Curso::where('id', $cursoId)->first();
         if (is_null($curso)) {
-            //error response
+            return $this->errorResponse(404, "No se encotro al curso con identificador {$cursoId}");
         }
         $bitacora = $curso->bitacora;
-        $observaciones = $bitacora->observaciones;
-        dd($curso);
+        return $this->successResponse($bitacora, 200);
     }
 }

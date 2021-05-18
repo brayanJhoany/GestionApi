@@ -8,8 +8,9 @@ use Illuminate\Http\Request;
 class UserController extends ApiController
 {
     /**
-     * displays information about a user
-     * @param id: user identifier
+     * muestra la informacion de un usuario en especifico.
+     * @param id: identificador de un usuario.
+     * @return User
      */
     public function show(int $id)
     {
