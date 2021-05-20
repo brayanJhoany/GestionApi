@@ -35,9 +35,7 @@ class CursoTransformer extends TransformerAbstract
         return [
             "id"        => $curso->id,
             "nombre"    => $curso->nombre,
-            "seccion"   => $curso->seccion,
-            // "nombreKey" => str_replace(" ", "-", $curso->nombre)
-            // "userId"    => $curso->user_id,
+            "seccion"   => $curso->seccion
         ];
     }
 }
