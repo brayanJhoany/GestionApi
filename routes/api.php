@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\CursoController;
 use App\Http\Controllers\ObservacionController;
+use App\Http\Controllers\PlanDeClaseController;
 use App\Http\Controllers\UserController;
 use App\Models\Observacion;
+use App\Models\PlanDeClases;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -33,4 +35,10 @@ Route::group(['prefix' => 'profesor'], function () {
     Route::put('{userId}/curso/{cursoId}/bitacora/{bitacoraId}/observacion/{id}', [ObservacionController::class, 'update']);
     Route::get('{userId}/curso/{cursoId}/bitacora/{bitacoraId}/observacion/{id}', [ObservacionController::class, 'show']);
     Route::delete('{userId}/curso/{cursoId}/bitacora/{bitacoraId}/observacion/{id}', [ObservacionController::class, 'destroy']);
+    //Plan de clases
+    Route::get('{usuarioId}/curso/{cursoId}/plan-de-clases', [PlanDeClaseController::class, 'index']);
+    Route::get('{usuarioId}/curso/{cursoId}/plan-de-clases/{id}', [PlanDeClaseController::class, 'show']);
+    Route::post('{usuarioId}/curso/{cursoId}/plan-de-clases', [PlanDeClaseController::class, 'store']);
+    Route::put('{usuarioId}/curso/{cursoId}/plan-de-clases/{id}', [PlanDeClaseController::class, 'update']);
+    Route::delete('{usuarioId}/curso/{cursoId}/plan-de-clases/{id}', [PlanDeClaseController::class, 'destroy']);
 });
