@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DetallePlanDeClases extends Model
+class PlanDeClase extends Model
 {
     use HasFactory;
 
@@ -15,8 +15,8 @@ class DetallePlanDeClases extends Model
      * @var array
      */
     protected $fillable = [
-        'semana', 'proposito',
-        'actividad', 'tiempo_precencial', 'actividad_no_precencial',
-        'trabajo_autonomo', 'informacion_extra', 'plan_de_clases_id'
+        'horario_de_clases',
+        'horario_de_consulta',
+        'curso_id'
     ];
 }
