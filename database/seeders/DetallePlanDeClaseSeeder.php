@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\DetallePlanDeClases;
-use App\Models\PlanDeClases;
+use App\Models\PlanDeClase;
 use Illuminate\Database\Seeder;
+use App\Models\DetallePlanDeClase;
 
-class DetallePlanDeClasesSeeder extends Seeder
+class DetallePlanDeClaseSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -24,7 +24,7 @@ class DetallePlanDeClasesSeeder extends Seeder
                 'actividad_no_precencial' => 'estudia mucho',
                 'trabajo_autonomo' => 2.5,
                 'informacion_extra' => null,
-                'plan_de_clases_id' => PlanDeClases::all()->random()->id
+                'plan_de_clases_id' => PlanDeClase::all()->random()->id
             ],
             [
                 'semana' => 'semana 2',
@@ -34,11 +34,11 @@ class DetallePlanDeClasesSeeder extends Seeder
                 'actividad_no_precencial' => 'estudia mucho',
                 'trabajo_autonomo' => 2.5,
                 'informacion_extra' => null,
-                'plan_de_clases_id' => PlanDeClases::all()->random()->id
+                'plan_de_clases_id' => PlanDeClase::all()->random()->id
             ]
         ];
         foreach ($detallePlanDeClases as $detallePlanDeClase) {
-            DetallePlanDeClases::updateOrCreate($detallePlanDeClase);
+            DetallePlanDeClase::updateOrCreate($detallePlanDeClase);
         }
     }
 }
