@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\PlanDeClases;
+use App\Models\PlanDeClase;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class PlanDeClasesFactory extends Factory
@@ -12,7 +12,7 @@ class PlanDeClasesFactory extends Factory
      *
      * @var string
      */
-    protected $model = PlanDeClases::class;
+    protected $model = PlanDeClase::class;
 
     /**
      * Define the model's default state.
