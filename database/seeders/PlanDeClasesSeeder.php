@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Curso;
-use App\Models\PlanDeClases;
+use App\Models\PlanDeClase;
 use Illuminate\Database\Seeder;
 
 class PlanDeClasesSeeder extends Seeder
@@ -36,7 +36,7 @@ class PlanDeClasesSeeder extends Seeder
             ],
         ];
         foreach ($PlanDeClases as $PlanDeClase) {
-            PlanDeClases::updateOrCreate($PlanDeClase);
+            PlanDeClase::updateOrCreate($PlanDeClase);
         }
     }
 }

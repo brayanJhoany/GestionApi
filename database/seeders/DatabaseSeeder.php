@@ -20,6 +20,6 @@ class DatabaseSeeder extends Seeder
         $this->call(BitacoraSeeder::class);
         $this->call(ObservacionSeeder::class);
         $this->call(PlanDeClasesSeeder::class);
-        $this->call(DetallePlanDeClasesSeeder::class);
+        $this->call(DetallePlanDeClaseSeeder::class);
     }
 }
