@@ -15,17 +15,18 @@ class CreateDetallePlanDeClasesTable extends Migration
     {
         Schema::create('detalle_plan_de_clases', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('semana', 255);
-            $table->text('proposito');
+            $table->dateTime('fecha');
+            $table->string('semana', 255)->nullable();
+            $table->text('proposito')->nullable();
             $table->text('actividad', 255);
-            $table->float('tiempo_precencial');
-            $table->text('actividad_no_precencial');
-            $table->float('trabajo_autonomo');
-            $table->json('informacion_extra')->nullable();
-            $table->bigInteger('plan_de_clases_id')->unsigned();
+            $table->float('tiempo_presencial')->nullable();
+            $table->text('actividad_no_presencial')->nullable();
+            $table->float('trabajo_autonomo')->nullable();
+            $table->string('informacion_extra')->nullable();
+            $table->bigInteger('plan_de_clase_id')->unsigned();
             $table->timestamps();
             //foreing key
-            $table->foreign('plan_de_clases_id')->references('id')->on('plan_de_clases')
+            $table->foreign('plan_de_clase_id')->references('id')->on('plan_de_clases')
                 ->onDelete('cascade')->onUpdate('cascade');
         });
     }
