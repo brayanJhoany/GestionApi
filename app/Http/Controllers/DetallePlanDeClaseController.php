@@ -93,7 +93,7 @@ class DetallePlanDeClaseController extends ApiController
         $detalle = new DetallePlanDeClase();
         $detalle->fecha         = $request->fecha;
         $detalle->semana        = $request->semana;
-        $detalle->saber_tema    = $request->saberTema;
+        $detalle->saber_tema    = $request->saber_tema;
         $detalle->actividad     = $request->actividad;
         $detalle->observacion   = $request->observacion;
         $detalle->plan_de_clase_id = $planId;
@@ -182,11 +182,11 @@ class DetallePlanDeClaseController extends ApiController
             "cursoId"               => 'required|Integer',
             "planId"                => 'required|Integer',
             "detalleId"             => 'required|Integer',
-            "fecha"                 => 'nullable|date',
-            "semana"                => 'nullable|string',
-            "saberTema"             => 'nullable|string',
-            "actividad"             => 'nullable|string',
-            "observacion"           => 'nullable|string',
+            //"fecha"                 => 'nullable|date',
+            //"semana"                => 'nullable|string',
+            //"saberTema"             => 'nullable|string',
+            //"actividad"             => 'nullable|string',
+            //"observacion"           => 'nullable|string',
         ];
     }
     private function setDataToCamelCase($detalle)
