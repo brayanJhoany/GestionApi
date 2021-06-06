@@ -91,14 +91,11 @@ class DetallePlanDeClaseController extends ApiController
                 . ', intentelo nuevamente');
         }
         $detalle = new DetallePlanDeClase();
-        $detalle->fecha = $request->fecha; //$this->setFormatDate($request->fecha);
-        $detalle->semana = $request->semana ?: null;
-        $detalle->proposito = $request->proposito ?: null;
-        $detalle->actividad = $request->actividad;
-        $detalle->tiempo_presencial = $request->tiempoPresencial ?: null;
-        $detalle->actividad_no_presencial = $request->actividadNoPresencial ?: null;
-        $detalle->trabajo_autonomo = $request->trabajoAutonomo ?: null;
-        $detalle->informacion_extra = $request->informacionExtra ?: null;
+        $detalle->fecha         = $request->fecha;
+        $detalle->semana        = $request->semana;
+        $detalle->saber_tema    = $request->saberTema;
+        $detalle->actividad     = $request->actividad;
+        $detalle->observacion   = $request->observacion;
         $detalle->plan_de_clase_id = $planId;
         $detalle->save();
         return $this->successResponse($this->setDataToCamelCase($detalle), 200);
@@ -136,12 +133,9 @@ class DetallePlanDeClaseController extends ApiController
         //update info
         $detalle->fecha = $request->fecha ?: $detalle->fecha;
         $detalle->semana = $request->semana ?: $detalle->semana;
-        $detalle->proposito = $request->proposito ?: $detalle->proposito;
+        $detalle->saber_tema = $request->saberTema ?: $detalle->saber_tema;
         $detalle->actividad = $request->actividad ?: $detalle->actividad;
-        $detalle->tiempo_presencial = $request->tiempoPresencial ?: $detalle->tiempoPrecencial;
-        $detalle->actividad_no_presencial = $request->actividadNoPresencial ?: $detalle->actividadNoPresencial;
-        $detalle->trabajo_autonomo = $request->trabajoAutonomo ?: $detalle->trabajoAutonomo;
-        $detalle->informacion_extra = $request->informacionExtra ?: $detalle->informacionExtra;
+        $detalle->observacion = $request->observacion ?: $detalle->observacion;
         $detalle->save();
         return $this->successResponse($this->setDataToCamelCase($detalle), 200);
     }
@@ -175,13 +169,10 @@ class DetallePlanDeClaseController extends ApiController
             "cursoId"               => 'required|Integer',
             "planId"                => 'required|Integer',
             "fecha"                 => 'required|date',
-            "semana"                => 'nullable|string',
-            "proposito"             => 'nullable|string',
-            "actividad"             => 'required|string',
-            "tiempoPresencial"      =>  ['nullable', 'numeric', 'min:1', 'max:99.99', 'regex:/^\d+(\.\d{1,2})?$/'],
-            "actividadNoPresencial" => 'nullable|string',
-            "trabajoAutonomo"       => ['nullable', 'numeric', 'min:1', 'max:99.99', 'regex:/^\d+(\.\d{1,2})?$/'],
-            "informacionExtra"      => 'nullable|string',
+            // "semana"                => 'required|string',
+            // "saberTema"             => 'required|string',
+            // "actividad"             => 'required|string',
+            // "observacion"           => 'required|string',
         ];
     }
     private function rulesUpdateValidation()
@@ -193,12 +184,9 @@ class DetallePlanDeClaseController extends ApiController
             "detalleId"             => 'required|Integer',
             "fecha"                 => 'nullable|date',
             "semana"                => 'nullable|string',
-            "proposito"             => 'nullable|string',
+            "saberTema"             => 'nullable|string',
             "actividad"             => 'nullable|string',
-            "tiempoPresencial"      =>  ['nullable', 'numeric', 'min:1', 'max:99.99', 'regex:/^\d+(\.\d{1,2})?$/'],
-            "actividadNoPresencial" => 'nullable|string',
-            "trabajoAutonomo"       => ['nullable', 'numeric', 'min:1', 'max:99.99', 'regex:/^\d+(\.\d{1,2})?$/'],
-            "informacionExtra"      => 'nullable|string',
+            "observacion"           => 'nullable|string',
         ];
     }
     private function setDataToCamelCase($detalle)

@@ -34,16 +34,13 @@ class DetallePlanDeClaseTransformer extends TransformerAbstract
     public function transform(DetallePlanDeClase $detallePlan)
     {
         return [
-            "id"                    => $detallePlan->id,
-            "fecha"                => $detallePlan->fecha,
-            "semana"                => $detallePlan->semana,
-            "proposito"             => $detallePlan->proposito,
-            "actividad"             => $detallePlan->actividad,
-            "tiempoPresencial"      => $detallePlan->tiempo_presencial,
-            "actividadNoPresencial" => $detallePlan->actividad_no_presencial,
-            "trabajoAutonomo"       => $detallePlan->trabajo_autonomo,
-            "informacionExtra"      => $detallePlan->informacion_extra,
-            "planDeClasesId"        => $detallePlan->plan_de_clase_id,
+            "id"                => $detallePlan->id,
+            "fecha"             => $detallePlan->fecha,
+            "semana"            => $detallePlan->semana,
+            "saber_tema"        => $detallePlan->saber_tema,
+            "actividad"         => $detallePlan->actividad,
+            "observacion"       => $detallePlan->tiempo_presencial,
+            "planDeClasesId"    => $detallePlan->plan_de_clase_id,
 
         ];
     }

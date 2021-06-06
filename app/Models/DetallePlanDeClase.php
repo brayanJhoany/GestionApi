@@ -15,8 +15,7 @@ class DetallePlanDeClase extends Model
      * @var array
      */
     protected $fillable = [
-        'semana', 'proposito',
-        'actividad', 'tiempo_precencial', 'actividad_no_precencial',
-        'trabajo_autonomo', 'informacion_extra', 'plan_de_clases_id'
+        'semana', 'fecha',
+        'saber_tema', 'actividad', 'observacion', 'plan_de_clases_id'
     ];
 }
