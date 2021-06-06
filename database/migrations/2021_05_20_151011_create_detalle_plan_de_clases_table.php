@@ -16,13 +16,10 @@ class CreateDetallePlanDeClasesTable extends Migration
         Schema::create('detalle_plan_de_clases', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->dateTime('fecha');
-            $table->string('semana', 255)->nullable();
-            $table->text('proposito')->nullable();
-            $table->text('actividad', 255);
-            $table->float('tiempo_presencial')->nullable();
-            $table->text('actividad_no_presencial')->nullable();
-            $table->float('trabajo_autonomo')->nullable();
-            $table->string('informacion_extra')->nullable();
+            $table->string('semana');
+            $table->text('saber_tema')->nullable();
+            $table->text('actividad');
+            $table->text('observacion');
             $table->bigInteger('plan_de_clase_id')->unsigned();
             $table->timestamps();
             //foreing key
