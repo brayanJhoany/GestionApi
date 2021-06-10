@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Curso extends Model
+class DetallePlanDeClase extends Model
 {
     use HasFactory;
 
@@ -15,15 +15,7 @@ class Curso extends Model
      * @var array
      */
     protected $fillable = [
-        'nombre',
-        'seccion',
+        'semana', 'fecha',
+        'saber_tema', 'actividad', 'observacion', 'plan_de_clases_id'
     ];
-    public function user()
-    {
-        return $this->belongsToMany(User::class);
-    }
-    public function bitacora()
-    {
-        return $this->hasOne(Bitacora::class);
-    }
 }

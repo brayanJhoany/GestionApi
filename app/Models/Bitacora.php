@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Curso extends Model
+class Bitacora extends Model
 {
     use HasFactory;
 
@@ -14,16 +14,15 @@ class Curso extends Model
      *
      * @var array
      */
-    protected $fillable = [
-        'nombre',
-        'seccion',
-    ];
-    public function user()
+    protected $fillable = ['curso_id'];
+
+    public function curso()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsTo(Curso::class);
     }
-    public function bitacora()
+
+    public function observaciones()
     {
-        return $this->hasOne(Bitacora::class);
+        return $this->hasMany(Observacion::class);
     }
 }
