@@ -33,7 +33,9 @@ class DetallePlanDeClaseController extends ApiController
             return $this->errorResponse(404, "No se encontro el plan de clases con identificador {$planId}"
                 . ', intentelo nuevamente');
         }
-        $detalle = DetallePlanDeClase::where('plan_de_clase_id', $planDeClase->id)->get();
+        $detalle = DetallePlanDeClase::where('plan_de_clase_id', $planDeClase->id)
+            ->orderBy('fecha', 'DESC')
+            ->get();
         $manager = new Manager();
         $manager->setSerializer(new SerializerCustom());
         $resource = new Collection($detalle, new DetallePlanDeClaseTransformer());
@@ -91,9 +93,9 @@ class DetallePlanDeClaseController extends ApiController
                 . ', intentelo nuevamente');
         }
         $detalle = new DetallePlanDeClase();
-        $detalle->fecha         = $request->fecha;
+        $detalle->fecha         = $this->setFormatDate($request->fecha);
         $detalle->semana        = $request->semana;
-        $detalle->saber_tema    = $request->saber_tema;
+        $detalle->saber_tema    = $request->saberTema;
         $detalle->actividad     = $request->actividad;
         $detalle->observacion   = $request->observacion;
         $detalle->plan_de_clase_id = $planId;
@@ -131,7 +133,7 @@ class DetallePlanDeClaseController extends ApiController
             return $this->errorResponse(404, "No se encotro el detalle del plan de clases {$planId}");
         }
         //update info
-        $detalle->fecha = $request->fecha ?: $detalle->fecha;
+        $detalle->fecha = $this->setFormatDate($request->fecha) ?: $detalle->fecha;
         $detalle->semana = $request->semana ?: $detalle->semana;
         $detalle->saber_tema = $request->saberTema ?: $detalle->saber_tema;
         $detalle->actividad = $request->actividad ?: $detalle->actividad;
@@ -199,8 +201,11 @@ class DetallePlanDeClaseController extends ApiController
     }
     private function setFormatDate($fecha)
     {
-        $formato = 'Y-m-d';
-        $date = DateTime::createFromFormat($formato, $fecha);
-        return $date;
+        if ($fecha) {
+            $fecha = new DateTime($fecha);
+            $date = $fecha->format('Y-m-d');
+            return $date;
+        }
+        return null;
     }
 }

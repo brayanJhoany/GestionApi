@@ -4,6 +4,7 @@ namespace App\Transformers;
 
 use App\Models\DetallePlanDeClase;
 use App\Models\PlanDeClase;
+use DateTime;
 use League\Fractal\TransformerAbstract;
 
 class DetallePlanDeClaseTransformer extends TransformerAbstract
@@ -33,9 +34,12 @@ class DetallePlanDeClaseTransformer extends TransformerAbstract
      */
     public function transform(DetallePlanDeClase $detallePlan)
     {
+        $fecha = new DateTime($detallePlan->fecha);
+        $date = $fecha->format('Y-m-d');
+
         return [
             "id"                => $detallePlan->id,
-            "fecha"             => $detallePlan->fecha,
+            "fecha"             => $date,
             "semana"            => $detallePlan->semana,
             "saber_tema"        => $detallePlan->saber_tema,
             "actividad"         => $detallePlan->actividad,
