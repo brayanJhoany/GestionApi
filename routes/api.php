@@ -4,6 +4,7 @@ use App\Http\Controllers\CursoController;
 use App\Http\Controllers\DetallePlanDeClaseController;
 use App\Http\Controllers\ObservacionController;
 use App\Http\Controllers\PlanDeClaseController;
+use App\Http\Controllers\SyllabusController;
 use App\Http\Controllers\UserController;
 use App\Models\DetallePlanDeClase;
 use App\Models\Observacion;
@@ -11,21 +12,6 @@ use App\Models\PlanDeClases;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-//'middleware' => ['cors']
 Route::get('/profesor/{id}', [UserController::class, 'show']);
 Route::group(['prefix' => 'profesor'], function () {
     //usuarios
@@ -73,4 +59,11 @@ Route::group(['prefix' => 'profesor'], function () {
     );
     Route::put('{usuarioId}/curso/{cursoId}/plan-de-clases/{planId}/detalle/{detalleId}', [DetallePlanDeClaseController::class, 'update']);
     Route::delete('{usuarioId}/curso/{cursoId}/plan-de-clases/{planId}/detalle/{detalleId}', [DetallePlanDeClaseController::class, 'destroy']);
+    //syllabus
+    Route::get('{usuarioId}/curso/{cursoId}/syllabus/{id}', [SyllabusController::class, 'show']);
+    Route::post('{usuarioId}/curso/{cursoId}/syllabus', [SyllabusController::class, 'store']);
+    Route::put('{usuarioId}/curso/{cursoId}/syllabus/{id}', [SyllabusController::class, 'update']);
+    Route::delete('{usuarioId}/curso/{cursoId}/syllabus/{id}', [SyllabusController::class, 'destroy']);
 });
+//Syllabus
+Route::get('syllabus', [SyllabusController::class, 'index']);
