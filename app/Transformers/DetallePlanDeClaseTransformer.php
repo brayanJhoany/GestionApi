@@ -39,7 +39,7 @@ class DetallePlanDeClaseTransformer extends TransformerAbstract
             "semana"            => $detallePlan->semana,
             "saber_tema"        => $detallePlan->saber_tema,
             "actividad"         => $detallePlan->actividad,
-            "observacion"       => $detallePlan->tiempo_presencial,
+            "observacion"       => $detallePlan->observacion,
             "planDeClasesId"    => $detallePlan->plan_de_clase_id,
 
         ];
