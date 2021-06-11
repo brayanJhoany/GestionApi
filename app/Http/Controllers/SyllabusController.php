@@ -15,6 +15,9 @@ use League\Fractal\Resource\Item;
 
 class SyllabusController extends ApiController
 {
+    /**
+     * Lista todos los syllabus registrados en la base de datos.
+     */
     public function index()
     {
         $syllabus = Syllabus::all();
@@ -27,6 +30,12 @@ class SyllabusController extends ApiController
         ];
         return $this->successResponse($data, 200);
     }
+    /**
+     * muestra un syllabus en especifico.
+     * @param usuarioId: identificador de un usuario.
+     * @param cursoId: identificador de un curso.
+     * @param id: identificador del syllabus a listar.
+     */
     public function show($usuarioId, $cursoId, $id)
     {
         $user = User::where('id', $usuarioId)->first(['id']);
@@ -45,6 +54,11 @@ class SyllabusController extends ApiController
         }
         return $this->successResponse($this->setDataToCamelCase($syllabus), 200);
     }
+    /**
+     * Registra un nuevo syllabus en la base de datos.
+     * @param usuarioId: identificador de un usuario.
+     * @param cursoId: identificador de un curso.
+     */
     public function store(Request $request, $usuarioId, $cursoId)
     {
         $identifier = ["usuarioId" => $usuarioId, "cursoId" => $cursoId];
@@ -81,6 +95,12 @@ class SyllabusController extends ApiController
         $syllabus->save();
         return $this->successResponse($this->setDataToCamelCase($syllabus), 200);
     }
+    /**
+     * Actualiza la informacion de un syllabus en especifico.
+     * @param usuarioId: identificador de un usuario.
+     * @param cursoId: identificador de un curso.
+     * @param syllabusId: identificador de un syllabus.
+     */
     public function update(Request $request, $usuarioId, $cursoId, $syllabusId)
     {
         $identifier = ["usuarioId" => $usuarioId, "cursoId" => $cursoId, ' $syllabusId' => $syllabusId];
@@ -142,6 +162,12 @@ class SyllabusController extends ApiController
         $syllabus->save();
         return $this->successResponse($this->setDataToCamelCase($syllabus), 200);
     }
+    /**
+     * Elimina un syllabus de la base de datos.
+     * @param usuarioId: identificador de un usuario.
+     * @param cursoId: identificador de un curso.
+     * @param id: identificador de un syllabus.
+     */
     public function destroy($usuarioId, $cursoId, $id)
     {
         $user = User::where('id', $usuarioId)->first(['id']);
@@ -158,6 +184,10 @@ class SyllabusController extends ApiController
         $syllabus->delete();
         return $this->successMessageResponse("Se elimino el syllabus exitosamente", 200);
     }
+    /**
+     * Cambia la respuesta de la base de datos a camelCase
+     * @param syllabus: instancia de un syllabus.
+     */
     private function setDataToCamelCase($syllabus)
     {
         $manager = new Manager();
@@ -166,6 +196,12 @@ class SyllabusController extends ApiController
         $data = $manager->createData($resource);
         return $data;
     }
+    /**
+     * Valida el array de identificadores de un curso, si la lista
+     * contiene identificadores de curso que no esten registrados
+     * en la base de datos, retornara false, true de lo contrario.
+     * @param cursos: lista de identificadores de curso.
+     */
     private function validarPreRequisitos($cursos)
     {
         try {
@@ -181,6 +217,9 @@ class SyllabusController extends ApiController
             return false;
         }
     }
+    /**
+     * Reglas para validar el registro de un syllabus.
+     */
     private function rulesStoreValidation()
     {
         return [
@@ -198,6 +237,9 @@ class SyllabusController extends ApiController
             'bibliografia'          => "required|array",
         ];
     }
+    /**
+     * reglas para validar la actualizacion de un syllabus.
+     */
     private function rulesUpdateValidation()
     {
         return [
