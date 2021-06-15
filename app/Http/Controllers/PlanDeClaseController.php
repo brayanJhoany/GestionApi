@@ -90,7 +90,7 @@ class PlanDeClaseController extends ApiController
                 . ', intetelo nuevamente');
         }
         $planDeClase = new PlanDeClase();
-        $planDeClase->horario_de_clases = json_encode($request->planDeClases);
+        $planDeClase->horario_de_clases = json_encode($request->horarioDeClase);
         $planDeClase->horario_de_consulta = json_encode($request->horarioDeConsulta);
         $planDeClase->curso_id = $request->cursoId;
         $planDeClase->save();
@@ -154,6 +154,10 @@ class PlanDeClaseController extends ApiController
         $planDeClase->delete();
         return $this->successResponse("Se elimino el plan de clases con existo", 200);
     }
+    /**
+     * Modifica el retorno de la base de datos a camelCase
+     * @param planDeClases: instancia de plan de clases.
+     */
     private function setDataToCamelCase($planDeClase)
     {
         $manager = new Manager();
@@ -162,7 +166,10 @@ class PlanDeClaseController extends ApiController
         $data = $manager->createData($resource);
         return $data;
     }
-
+    /**
+     * Reglas para validar los parametros al registrar un
+     * plan de clases
+     */
     private function rulesStoreValidation()
     {
         return [
@@ -172,6 +179,10 @@ class PlanDeClaseController extends ApiController
             "horarioDeConsulta"     => 'required|array|min:1'
         ];
     }
+    /**
+     * Reglas para validar la actualización de la informacion
+     * de un plan de clases.
+     */
     private function rulesUpdateValidation()
     {
         return [
