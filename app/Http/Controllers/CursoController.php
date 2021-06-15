@@ -13,7 +13,8 @@ use League\Fractal\Resource\Collection;
 class CursoController extends ApiController
 {
     /**
-     * shows the courses associated with a user
+     * Entrega un listado de los cursos
+     * registrados en la base de datos
      * @param userId: user identifier.
      */
     public function index($userId)
