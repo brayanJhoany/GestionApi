@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use League\Fractal\Resource\Item;
 use App\Transformers\SerializerCustom;
 use App\Http\Controllers\ApiController;
+use App\Models\Bitacora;
 use League\Fractal\Resource\Collection;
 use App\Transformers\ObservacionTransformer;
 
@@ -32,8 +33,10 @@ class ObservacionController extends ApiController
             return $this->errorResponse(404, "No se encotro el curso con identificador {$cursoId}.");
         }
         $bitacora = $curso->bitacora;
-        if (is_null($bitacora)) {
-            return $this->errorResponse(404, "No se encontro la bitacora con identificador {$bitacoraId}");
+        //por si no pasan el cambio
+        $bitacora = Bitacora::where('id', $bitacoraId)->where('curso_id', $curso->id)->first();
+        if (!$bitacora) {
+            return $this->errorResponse(404, "El curso no tiene bitacora asociada");
         }
         $observaciones = Observacion::where('bitacora_id', $bitacora->id)
             ->orderBy('created_at', 'ASC')->get();
@@ -108,9 +111,9 @@ class ObservacionController extends ApiController
         if (is_null($observacion)) {
             return $this->errorResponse(404, "observacion no encotrada");
         }
-        $observacion->titulo = $request->titulo;
-        $observacion->descripcion = $request->descripcion;
-        $observacion->fecha = $request->fecha;
+        $observacion->titulo = $request->titulo ?: $observacion->titulo;
+        $observacion->descripcion = $request->descripcion ?: $observacion->descripcion;
+        $observacion->fecha = $request->fecha ?: $observacion->fecha;
         $observacion->save();
         $manager = new Manager();
         $manager->setSerializer(new SerializerCustom());
