@@ -90,7 +90,7 @@ class PlanDeClaseController extends ApiController
                 . ', intetelo nuevamente');
         }
         $planDeClase = new PlanDeClase();
-        $planDeClase->horario_de_clases = json_encode($request->planDeClases);
+        $planDeClase->horario_de_clases = json_encode($request->horarioDeClase);
         $planDeClase->horario_de_consulta = json_encode($request->horarioDeConsulta);
         $planDeClase->curso_id = $request->cursoId;
         $planDeClase->save();
