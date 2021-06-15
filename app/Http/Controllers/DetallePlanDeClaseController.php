@@ -17,6 +17,12 @@ use League\Fractal\Resource\Item;
 
 class DetallePlanDeClaseController extends ApiController
 {
+    /**
+     * Entrega un listado del detalle de un plan de clases.
+     * @param usuarioId: identificador de un usuario.
+     * @param cursoId: identificador de un curso.
+     * @param planId: identificador de un plan de clases.
+     */
     public function index($usuarioId, $cursoId, $planId)
     {
         $user = User::where('id', $usuarioId)->first(['id']);
@@ -45,6 +51,13 @@ class DetallePlanDeClaseController extends ApiController
         ];
         return $this->successResponse($data, 200);
     }
+    /**
+     * Muestra el detalle especifico de un plan de clases.
+     * @param usuarioId: identificador de un usuario.
+     * @param cursoId: identificador de un curso.
+     * @param planId: identificador de un plan de clases.
+     * @param detalleId: identificador de un detalle de plan de clases.
+     */
     public function show($usuarioId, $cursoId, $planId, $detalleId)
     {
         $user = User::where('id', $usuarioId)->first(['id']);
@@ -67,6 +80,12 @@ class DetallePlanDeClaseController extends ApiController
         }
         return $this->successResponse($this->setDataToCamelCase($detalle), 200);
     }
+    /**
+     * Registra un nuevo detalle de un plan de clases.
+     * @param usuarioId: identificador de un usuario.
+     * @param cursoId: identificador de un curso.
+     * @param planId: identificador de un plan de clases.
+     */
     public function store(Request $request, $usuarioId, $cursoId, $planId)
     {
         $identifier = [
@@ -102,6 +121,13 @@ class DetallePlanDeClaseController extends ApiController
         $detalle->save();
         return $this->successResponse($this->setDataToCamelCase($detalle), 200);
     }
+    /**
+     * Actualiza la información de un detalle de plan de clases.
+     * @param usuarioId: identificador de un usuario.
+     * @param cursoId: identificador de un curso.
+     * @param planId: identificador de un plan de clases.
+     * @param detalleId: identificador de un detalle de plan de clases.
+     */
     public function update(Request $request, $usuarioId, $cursoId, $planId, $detalleId)
     {
         $identifier = [
@@ -141,6 +167,13 @@ class DetallePlanDeClaseController extends ApiController
         $detalle->save();
         return $this->successResponse($this->setDataToCamelCase($detalle), 200);
     }
+    /**
+     * Elimina el detalle de un plan de clases en especifico.
+     * @param usuarioId: identificador de un usuario.
+     * @param cursoId: identificador de un curso.
+     * @param planId: identificador de un plan de clases.
+     * @param detalleId: identificador de un detalle de plan de clases.
+     */
     public function destroy($usuarioId, $cursoId, $planId, $detalleId)
     {
         $user = User::where('id', $usuarioId)->first(['id']);
@@ -164,6 +197,9 @@ class DetallePlanDeClaseController extends ApiController
         $detalle->delete();
         return $this->successResponse("se elimino correctamente el detalle del pla de clases", 200);
     }
+    /**
+     * Reglas de validacion para registrar un nuevo plan de clases.
+     */
     private function rulesStoreValidation()
     {
         return [
@@ -171,12 +207,15 @@ class DetallePlanDeClaseController extends ApiController
             "cursoId"               => 'required|Integer',
             "planId"                => 'required|Integer',
             "fecha"                 => 'required|date',
-            // "semana"                => 'required|string',
-            // "saberTema"             => 'required|string',
-            // "actividad"             => 'required|string',
-            // "observacion"           => 'required|string',
+            "semana"                => 'required|string',
+            "saberTema"             => 'required|string',
+            "actividad"             => 'required|string',
+            "observacion"           => 'required|string',
         ];
     }
+    /**
+     * Reglas para actualizar un detalle de plan de clases en especifico.
+     */
     private function rulesUpdateValidation()
     {
         return [
@@ -184,13 +223,17 @@ class DetallePlanDeClaseController extends ApiController
             "cursoId"               => 'required|Integer',
             "planId"                => 'required|Integer',
             "detalleId"             => 'required|Integer',
-            //"fecha"                 => 'nullable|date',
-            //"semana"                => 'nullable|string',
-            //"saberTema"             => 'nullable|string',
-            //"actividad"             => 'nullable|string',
-            //"observacion"           => 'nullable|string',
+            "fecha"                 => 'nullable|date',
+            "semana"                => 'nullable|string',
+            "saberTema"             => 'nullable|string',
+            "actividad"             => 'nullable|string',
+            "observacion"           => 'nullable|string',
         ];
     }
+    /**
+     * Modifica la respuesta de la base de datos, a estilo camelCase.
+     * @param detalle: instancia de detalle de un plan de clases.
+     */
     private function setDataToCamelCase($detalle)
     {
         $manager = new Manager();
@@ -199,6 +242,10 @@ class DetallePlanDeClaseController extends ApiController
         $data = $manager->createData($resource);
         return $data;
     }
+    /**
+     * Modifica el formato de la fecha.
+     * año-mes-dia.
+     */
     private function setFormatDate($fecha)
     {
         if ($fecha) {
