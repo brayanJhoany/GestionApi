@@ -16,7 +16,7 @@ class UserController extends ApiController
     {
         $user = User::where('id', $id)->first();
         if (is_null($user)) {
-            return $this->errorResponse(200, "No se encotro el usuario");
+            return $this->errorResponse(200, "No se encotro el usuario con identificador {$id}");
         }
         $data = [
             "error" => false,
