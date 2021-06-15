@@ -50,7 +50,7 @@ class SyllabusController extends ApiController
         }
         $syllabus = Syllabus::where('curso_id', $curso->id)->where('id', $id)->first();
         if (!$syllabus) {
-            return $this->errorResponse(404, "syllabus no encotrado.");
+            return $this->errorResponse(404, "syllabus con el identificador {$id} no encotrado, intentelo nuevamente.");
         }
         return $this->successResponse($this->setDataToCamelCase($syllabus), 200);
     }
