@@ -32,6 +32,7 @@ class PlanDeClaseTransformer extends TransformerAbstract
      */
     public function transform(PlanDeClase $planDeClase)
     {
+
         return [
             "id"                    => $planDeClase->id,
             "horarioDeClases"       => json_decode($planDeClase->horario_de_clases),
