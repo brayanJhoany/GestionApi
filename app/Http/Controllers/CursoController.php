@@ -35,4 +35,21 @@ class CursoController extends ApiController
         ];
         return $this->successResponse($data, 200);
     }
+
+    public function showAll($usuarioId) {
+        $usuario = User::where('id', $usuarioId)->first();
+        if (!$usuario) {
+            return $this->errorResponse(404, "No se encontro el usuario con el identificador {$usuarioId}"
+                . ", intentelo nuevamente.");
+        }
+        $cursos = Curso::all();
+        $manager = new Manager();
+        $manager->setSerializer(new SerializerCustom());
+        $resource = new Collection($cursos, new CursoTransformer());
+        $data = [
+            "error" => false,
+            "cursos" => SerializerCustom::fractalResponse($resource)
+        ];
+        return $this->successResponse($data, 200);
+    }
 }
