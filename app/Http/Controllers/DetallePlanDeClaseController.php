@@ -97,6 +97,7 @@ class DetallePlanDeClaseController extends ApiController
         if ($validator->fails()) {
             return $this->errorResponse(400, 'los parametros ingresados no son validos');
         }
+        //http://127.0.0.1:8000/profesor/1/curso/2/plan-de-clases/1/detalle
         $user = User::where('id', $usuarioId)->first(['id']);
         if (!$user) {
             return $this->errorResponse(404, "No se encontro el usuario con identificador {$usuarioId}");
@@ -207,7 +208,7 @@ class DetallePlanDeClaseController extends ApiController
             "cursoId"               => 'required|Integer',
             "planId"                => 'required|Integer',
             "fecha"                 => 'required|date',
-            "semana"                => 'required|string',
+            "semana"                => 'required|Integer',
             "saberTema"             => 'required|string',
             "actividad"             => 'required|string',
             "observacion"           => 'required|string',
@@ -224,7 +225,7 @@ class DetallePlanDeClaseController extends ApiController
             "planId"                => 'required|Integer',
             "detalleId"             => 'required|Integer',
             "fecha"                 => 'nullable|date',
-            "semana"                => 'nullable|string',
+            "semana"                => 'nullable|Integer',
             "saberTema"             => 'nullable|string',
             "actividad"             => 'nullable|string',
             "observacion"           => 'nullable|string',
