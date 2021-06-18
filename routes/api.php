@@ -16,6 +16,7 @@ Route::get('/profesor/{id}', [UserController::class, 'show']);
 Route::group(['prefix' => 'profesor'], function () {
     //usuarios
     Route::get('/{userId}/cursos', [CursoController::class, 'index']);
+    Route::get('/{userId}/allcursos', [CursoController::class, 'showAll']);
     Route::get('/{userId}/curso/{cursoId}', [CursoController::class, 'index']);
     //observaciones
     Route::get(
