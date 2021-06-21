@@ -15,27 +15,19 @@ class PlanDeClasesSeeder extends Seeder
      */
     public function run()
     {
-        $PlanDeClases = [
-            [
+        $cursos = Curso::all();
+        foreach ($cursos as $curso) {
+            $PlanDeClase = [
+
                 'horario_de_clases' => json_encode([
                     'lunes' => "10:30-11:30"
                 ]),
                 'horario_de_consulta' => json_encode([
                     'viernes' => "10:30-11:30"
                 ]),
-                'curso_id' => Curso::all()->random()->id
-            ],
-            [
-                'horario_de_clases' => json_encode([
-                    'lunes' => "10:30-11:30"
-                ]),
-                'horario_de_consulta' => json_encode([
-                    'viernes' => "10:30-11:30"
-                ]),
-                'curso_id' => Curso::all()->random()->id
-            ],
-        ];
-        foreach ($PlanDeClases as $PlanDeClase) {
+                'curso_id' => $curso->id
+
+            ];
             PlanDeClase::updateOrCreate($PlanDeClase);
         }
     }

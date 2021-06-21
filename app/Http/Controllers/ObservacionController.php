@@ -33,8 +33,6 @@ class ObservacionController extends ApiController
             return $this->errorResponse(404, "No se encotro el curso con identificador {$cursoId}.");
         }
         $bitacora = $curso->bitacora;
-        //por si no pasan el cambio
-        $bitacora = Bitacora::where('id', $bitacoraId)->where('curso_id', $curso->id)->first();
         if (!$bitacora) {
             return $this->errorResponse(404, "El curso no tiene bitacora asociada");
         }
