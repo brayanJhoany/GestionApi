@@ -17,14 +17,14 @@ class CreateSyllabusTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('curso_id')->unsigned();
             $table->integer('nro_creditos');
-            $table->string('area_conocimiento');
+            $table->text('area_conocimiento');
             $table->integer('semestre');
             $table->json('pre_requisito');
-            $table->string('responsable_syllabus');
+            $table->text('responsable_syllabus');
             $table->json('competencia');
             $table->json('aprendizaje');
             $table->json('unidad');
-            $table->string('metodologia');
+            $table->text('metodologia');
             $table->json('bibliografia');
             $table->timestamps();
             //foreing key

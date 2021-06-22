@@ -16,7 +16,7 @@ class CreateDetallePlanDeClasesTable extends Migration
         Schema::create('detalle_plan_de_clases', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->dateTime('fecha');
-            $table->string('semana');
+            $table->text('semana');
             $table->text('saber_tema')->nullable();
             $table->text('actividad');
             $table->text('observacion');
