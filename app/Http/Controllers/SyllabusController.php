@@ -36,7 +36,7 @@ class SyllabusController extends ApiController
      * @param cursoId: identificador de un curso.
      * @param id: identificador del syllabus a listar.
      */
-    public function show($usuarioId, $cursoId, $id)
+    public function show($usuarioId, $cursoId)
     {
         $user = User::where('id', $usuarioId)->first(['id']);
         if (!$user) {
@@ -48,9 +48,9 @@ class SyllabusController extends ApiController
             return $this->errorResponse(404, "No se encontro el curso con identificador {$cursoId}"
                 . ', intetelo nuevamente');
         }
-        $syllabus = Syllabus::where('curso_id', $curso->id)->where('id', $id)->first();
+        $syllabus = $curso->syllabus;
         if (!$syllabus) {
-            return $this->errorResponse(404, "syllabus con el identificador {$id} no encotrado, intentelo nuevamente.");
+            return $this->errorResponse(404, "Syllabus no encotrado, intentelo nuevamente.");
         }
         return $this->successResponse($this->setDataToCamelCase($syllabus), 200);
     }
@@ -125,7 +125,7 @@ class SyllabusController extends ApiController
                 return $this->errorResponse(404, "No se encontraron los cursos de pre-requisito, intentelo de nuevo.");
             }
         }
-        $syllabus = Syllabus::where('id', $syllabusId)->first();
+        $syllabus = $curso->syllabus;
         if (!$syllabus) {
             return $this->errorResponse(404, "No se encotro el syllabus, intentelo mas tarde.");
         }
@@ -180,7 +180,7 @@ class SyllabusController extends ApiController
             return $this->errorResponse(404, "No se encontro el curso con identificador {$cursoId}"
                 . ', intetelo nuevamente');
         }
-        $syllabus = Syllabus::where('id', $id)->first();
+        $syllabus = $curso->syllabus;
         $syllabus->delete();
         return $this->successMessageResponse("Se elimino el syllabus exitosamente", 200);
     }
