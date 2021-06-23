@@ -61,10 +61,10 @@ Route::group(['prefix' => 'profesor'], function () {
     Route::put('{usuarioId}/curso/{cursoId}/plan-de-clases/{planId}/detalle/{detalleId}', [DetallePlanDeClaseController::class, 'update']);
     Route::delete('{usuarioId}/curso/{cursoId}/plan-de-clases/{planId}/detalle/{detalleId}', [DetallePlanDeClaseController::class, 'destroy']);
     //syllabus
-    Route::get('{usuarioId}/curso/{cursoId}/syllabus/{id}', [SyllabusController::class, 'show']);
+    Route::get('{usuarioId}/curso/{cursoId}/syllabus', [SyllabusController::class, 'show']);
     Route::post('{usuarioId}/curso/{cursoId}/syllabus', [SyllabusController::class, 'store']);
-    Route::put('{usuarioId}/curso/{cursoId}/syllabus/{id}', [SyllabusController::class, 'update']);
-    Route::delete('{usuarioId}/curso/{cursoId}/syllabus/{id}', [SyllabusController::class, 'destroy']);
+    Route::put('{usuarioId}/curso/{cursoId}/syllabus', [SyllabusController::class, 'update']);
+    Route::delete('{usuarioId}/curso/{cursoId}/syllabus', [SyllabusController::class, 'destroy']);
 });
 //Syllabus
 Route::get('syllabus', [SyllabusController::class, 'index']);

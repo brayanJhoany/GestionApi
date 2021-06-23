@@ -26,4 +26,8 @@ class Curso extends Model
     {
         return $this->hasOne(Bitacora::class);
     }
+    public function syllabus()
+    {
+        return $this->hasOne(Syllabus::class);
+    }
 }
