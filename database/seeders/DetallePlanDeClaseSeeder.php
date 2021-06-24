@@ -18,7 +18,7 @@ class DetallePlanDeClaseSeeder extends Seeder
         $detallePlanDeClases = [
             [
                 'fecha' => '2021-06-05',
-                'semana' => 'semana 1',
+                'semana' => '1',
                 'saber_tema' => 'un nuevo proposito',
                 'actividad' => 'nueva actividad',
                 'observacion' => 'nueva observacion',
@@ -26,7 +26,7 @@ class DetallePlanDeClaseSeeder extends Seeder
             ],
             [
                 'fecha' => '2021-06-15',
-                'semana' => 'semana 2',
+                'semana' => '2',
                 'saber_tema' => 'Nuevo tema',
                 'actividad' => 'nueva actividad',
                 'observacion' => 'nueva observacion',
