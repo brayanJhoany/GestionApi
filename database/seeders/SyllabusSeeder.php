@@ -22,7 +22,12 @@ class SyllabusSeeder extends Seeder
                 "nro_creditos" => 5,
                 "area_conocimiento" => "semana 1",
                 "semestre" => 1,
-                "pre_requisito" => json_encode(["cursoIds" => [Curso::all()->random()->id]]),
+                "pre_requisito" => json_encode(
+                    [
+                        [
+                            "cursoIds" => [Curso::all()->random()->id]
+                        ],
+                    ]),
                 "responsable_syllabus" => "Brayan Escobar",
                 "competencia" => json_encode(["competencia 1", "competencia 2"]),
                 "aprendizaje" => json_encode(["aprendizaje 1", "aprendizaje 2"]),
