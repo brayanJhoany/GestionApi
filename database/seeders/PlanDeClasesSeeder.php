@@ -20,10 +20,10 @@ class PlanDeClasesSeeder extends Seeder
             $PlanDeClase = [
 
                 'horario_de_clases' => json_encode([
-                    'lunes' => "10:30-11:30"
+                    'horarios' => array()
                 ]),
                 'horario_de_consulta' => json_encode([
-                    'viernes' => "10:30-11:30"
+                    'horarios' => array()
                 ]),
                 'curso_id' => $curso->id
 
